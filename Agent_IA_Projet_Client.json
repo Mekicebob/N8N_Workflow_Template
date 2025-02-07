@@ -1,0 +1,660 @@
+{
+  "name": "Agent IA Projet Client",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n  \"contexte\": {},\n  \"contenu\": {}\n}"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        740,
+        -340
+      ],
+      "id": "bb10eea0-8185-4b74-b1ba-7d098c764a8a",
+      "name": "Workflow Input Trigger",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.1,
+      "position": [
+        1040,
+        -80
+      ],
+      "id": "3a138e65-f736-42fc-b8ac-779434050f98",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "KYIz1dzfnrWiqN1K",
+          "name": "N8N VRAI OPENAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "Agent_Email",
+        "description": "Cet Agent permet de gerer tous ce qui est lié au mail.",
+        "workflowId": {
+          "__rl": true,
+          "value": "MP7KJlj42dhEcAtw",
+          "mode": "list",
+          "cachedResultName": "Agent Email Projet Client"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contexte": "={{$fromAI(\"contexte\")}}",
+            "email_metadata": "={{$fromAI(\"email_metadata\",\"email_metadata au format JSON\")}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "contexte",
+              "displayName": "contexte",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "email_metadata",
+              "displayName": "email_metadata",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        1600,
+        -40
+      ],
+      "id": "3002b086-86c5-4f80-888b-4d22677ae5d2",
+      "name": "Email Agent"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "bases_de_connaissances_entreprise",
+        "toolDescription": "Cet base de données comporte des informations sur l'entreprise concernant toutes l'entreprise : \n- Réponses aux mails",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "rag_test_video",
+          "mode": "list",
+          "cachedResultName": "rag_test_video"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        -60
+      ],
+      "id": "0b183905-64c1-4e07-ab89-fdf60f68c131",
+      "name": "Qdrant Vector Store",
+      "credentials": {
+        "qdrantApi": {
+          "id": "9JqTObX6NgZUQVRP",
+          "name": "QdrantApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1160,
+        80
+      ],
+      "id": "c61c09f3-0c3d-4b0a-ba70-a95c6845c562",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "Vm2aEK1EsphLWx7X",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "calcul_distance_temps",
+        "description": "Cet outil te permet de calculer le temps pour arriver à une destination d'intervention précise.",
+        "workflowId": {
+          "__rl": true,
+          "value": "OP6u1SPfJSawxCvm",
+          "mode": "list",
+          "cachedResultName": "Calcul Distance Temps"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "point_B": "={{$fromAI(\"lieu_intervention\",\"destination de l'intervention à calculer le temps le temps de déplacement. Exemple : 23 Rue Victor Hugo,33000 Bordeaux\")}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "point_A",
+              "displayName": "point_A",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "point_B",
+              "displayName": "point_B",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        1460,
+        -40
+      ],
+      "id": "6036dfe2-1879-46c5-9e57-f42494534adc",
+      "name": "Calcul Distance Temps"
+    },
+    {
+      "parameters": {
+        "name": "agen_calendrier",
+        "description": "Cet agent gère tout ce qui est relié aux calendrier (création,supression,modification d'évenement, vérifier la disponibilité pour se déplacer, etc)",
+        "workflowId": {
+          "__rl": true,
+          "value": "GcCKZhb3s4aRl1W7",
+          "mode": "list",
+          "cachedResultName": "Agent Calendrier Projet Client"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "action": "={{$fromAI(\"action\",\"détaillé le plus possible avec toutes les actions à réaliser\")}}",
+            "contexte": "={{$fromAI(\"action\",\"détaillé le plus possible avec tout le contexte nécessaire\")}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "action",
+              "displayName": "action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "contexte",
+              "displayName": "contexte",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        -40
+      ],
+      "id": "c3c618b7-b99f-4798-89ba-0dd5f25e037a",
+      "name": "Agent Calendrier"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        440,
+        -40
+      ],
+      "id": "8ec28d9a-e2fa-43c2-b59b-27f506e81b30",
+      "name": "Telegram Trigger",
+      "webhookId": "eb5ec07d-0059-4ca8-9380-1cf911f977b3",
+      "credentials": {
+        "telegramApi": {
+          "id": "Lw96YiMSkokvWZwg",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {
+          "language": "fr"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.7,
+      "position": [
+        880,
+        -160
+      ],
+      "id": "1460f85b-9d59-4d1c-927b-b3f344ecb16a",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "KYIz1dzfnrWiqN1K",
+          "name": "N8N VRAI OPENAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.voice.file_id }}"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        740,
+        -160
+      ],
+      "id": "81cfaad1-2dd3-40e0-ae2b-046f8fd3dae8",
+      "name": "Telegram",
+      "credentials": {
+        "telegramApi": {
+          "id": "Lw96YiMSkokvWZwg",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.voice }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Audio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "6ce13df7-74d1-46dc-a051-a99a13b9d2e8",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Texte"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        600,
+        -40
+      ],
+      "id": "4defecdd-b352-4955-ab9a-4a23d86f6fb1",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f33b9884-736e-4ed8-8823-2c3d98d8c21f",
+              "leftValue": "={{ $('Telegram Trigger').isExecuted}}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1500,
+        -260
+      ],
+      "id": "0bb99661-0ff6-460a-9f33-8fdd7a994d6a",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"status\": {\n\t\t\t\"type\": \"string\",\n          \"description\":\"succes ou echec\"\n\t\t},\n\t\t\"message\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\":\"le message de réponse\"\n\t\t}\n\t}\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        1940,
+        -40
+      ],
+      "id": "a72f0523-96b8-4d8e-9ff6-7e551859195f",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').first().json.message.chat.id}}",
+        "text": "={{ $json.output.message }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "reply_to_message_id": "={{ $('Telegram Trigger').first().json.message.message_id}}"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1900,
+        -220
+      ],
+      "id": "7c20d25d-a26d-427f-a399-69766fc04fac",
+      "name": "Envois Message Telegram",
+      "credentials": {
+        "telegramApi": {
+          "id": "Lw96YiMSkokvWZwg",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Message Telegram reçu : \n\n{{ $('Telegram Trigger').isExecuted ? ($('OpenAI').isExecuted ? $('OpenAI').first().json.text : $json.message.text) : \"Pas de message Telegram reçu\" }}\n\nInformations sur le mail recu : \n{{ $('Workflow Input Trigger').isExecuted ? $json.contenu?.toJsonString():\"Pas d'informations sur le mail recu Message Telegram\"}}\n\nContexte : \n{{ $('Workflow Input Trigger').isExecuted ?$json.contexte?.toJsonString() :\"Message Telegram\" }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=SYSTEME\nTu es l'assistant personnel de Benoit. Ton objectif est de gérer la totalité des emails, le calendrier et le calcul du temps de trajet pour les interventions. Tu disposes de toutes les informations et autorisations de l'entreprise pour répondre aux mails des clients, gérer les disponibilités, créer ou modifier des événements dans le calendrier et envoyer des emails directement à partir des demandes reçues par email ou Telegram.\n\nCas Email : Suis la procédure classique incluant l'analyse, la vérification et la création d'un brouillon ou l'envoi d'un email définitif selon les règles en place.\nCas Telegram : Pour les demandes issues de Telegram, tu peux directement :\nEnvoyer un email à n'importe quel destinataire sans passer par la création d'un brouillon.\nCréer un événement dans le calendrier aux dates et heures indiquées.\nModifier un événement existant ou d'autres éléments (selon la demande) sans vérification supplémentaire.\nETAPES\n\nAnalyse de la Demande et Détermination de la Source\n\nIdentifier la source de la demande : email ou message Telegram.\nPour une demande par email :\nIdentifier la localisation (vérifier si une adresse précise est mentionnée).\nRelever les informations complémentaires et les éventuelles demandes spécifiques.\nDéterminer si la demande concerne des disponibilités (dans ce cas, utiliser l’Agent Calendrier).\nPour une demande par Telegram :\nExtraire directement les informations pertinentes (destinataire, contenu de l’email, date, heure, description, etc.) nécessaires pour l’action demandée (envoi d'email, création ou modification d’événement).\nUtilisation de l'Outil Calcul Distance Temps (Cas Email uniquement)\n\nSi une adresse précise est fournie dans le mail, utiliser l’outil pour calculer le temps de trajet.\nSi l’adresse est floue ou absente, ne pas déclencher cet outil et poursuivre l’analyse.\nRécupération des Informations\n\nExtraire les données pertinentes dans la base de données pour répondre correctement à la demande, en fonction de la source (email ou Telegram).\nValidation et Traitement de l’Intervention\n\nPour une demande Email :\nVérifier que l’intervention respecte les conditions définies :\nSi le temps de trajet dépasse 15 minutes, envoyer un mail spécifique préconfiguré (via la base de données).\nPour toute demande de disponibilité, vérifier le calendrier avec l’Agent Calendrier.\nPour une demande Telegram :\nLa demande est considérée comme validée automatiquement, et tu exécutes directement l'action demandée sans vérification supplémentaire.\nSelon la demande, procéder à l’envoi immédiat de l’email, à la création d’un nouvel événement ou à la modification d’un événement existant.\nValidation de la Date et de l’Heure de l’Intervention (Cas Email)\n\nDès que le client a validé la date et l’heure de l’intervention dans le cadre d’un email, effectuer les actions suivantes :\nCréation d’un brouillon de réponse : Générer et envoyer un brouillon de réponse par email en confirmant la date, l’heure validées et toutes les informations nécessaires.\nCréation d’un événement dans le calendrier : Utiliser l’Agent Calendrier pour créer un événement correspondant à l’intervention.\nSOUS AGENTS IA À TA DISPOSITION\n\nAgent Email : Accède à l'ensemble des mails de Bruce et réalise toutes les actions sur son compte Google Mail (création, modification, suppression, tri, etc.).\nAgent Calendrier : Accède à l’ensemble du calendrier de Bruce et effectue toutes les actions possibles sur son calendrier Google (vérification de disponibilité, création, modification, suppression d’évènements).\nOUTILS\n\nCalcul Distance Temps : Permet de calculer le temps de trajet nécessaire pour l’intervention, utilisé uniquement lorsque l’adresse est suffisamment précise dans le mail.\nCONTRAINTES\n\nPour les trajets dont la durée est supérieure à 15 minutes dans les demandes par email, renvoyer un mail spécifique préconfiguré dans la base de données.\nLes actions et le contexte fournis aux outils doivent être précis et regrouper toutes les informations nécessaires pour réaliser les actions demandées.\nUtilise l’outil Calcul Distance Temps uniquement lorsqu'une adresse précise est indiquée dans le mail. Si l’adresse est floue ou absente, ne pas déclencher cet outil.\nPour toute demande concernant les disponibilités par email, fais systématiquement appel à l’Agent Calendrier.\nLors de la validation de la date et de l’heure par le client dans le cadre d’un email, assure-toi de créer simultanément un brouillon de réponse et un événement dans le calendrier.\nPour les demandes issues de Telegram, les actions demandées (envoi d'email, création ou modification d’événement) se font automatiquement et directement sans vérification intermédiaire."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1140,
+        -260
+      ],
+      "id": "fccdf097-b6f7-43a4-b476-d2a3abff4658",
+      "name": "Agent IA"
+    }
+  ],
+  "pinData": {
+    "Workflow Input Trigger": [
+      {
+        "json": {
+          "contexte": {
+            "historique_message": "Message 0\nFrom: Benoit Ferrere <benoit.ferrere11@gmail.com>\nDate: Wed, 5 Feb 2025 20:41:43 +0100\nContenu : Bonjour,Je souhaite installer une borne de recharge pour mon véhicule électrique à mon domicile. Merci de bien vouloir m’envoyer une proposition de devis et de convenir d’un rendez-vous pour évaluer le chantier.Adresse d’installation :Rue Montbazon, 33000 BordeauxCordialement,Benoit\n---------------\nMessage 1\nFrom: Benoit Ferrere <benoit.ferrere11@gmail.com>\nDate: Wed, 5 Feb 2025 20:49:51 +0100\nContenu : false\n---------------\nMessage 2\nFrom: Benoit Ferrere <benoit.ferrere11@gmail.com>\nDate: Wed, 5 Feb 2025 20:50:28 +0100\nContenu : Oui je suis disponible demain à 11h30 pour l&#39;installation\n---------------\n"
+          },
+          "contenu": {
+            "threadId": "194d79fba1d0d9f3",
+            "id": "194d7a203cc1c7b4",
+            "from": "From: Benoit Ferrere <benoit.ferrere11@gmail.com>",
+            "sujet": "Subject: =?UTF-8?Q?Borne_de_recharge_v=C3=A9hicule?=",
+            "to": "To: Benoit Ferrere <benoit.ferrere11@gmail.com>",
+            "cc": null,
+            "text": "Bonjour,\n\nJe souhaite installer une borne de recharge pour mon véhicule électrique à\nmon domicile. Merci de bien vouloir m’envoyer une proposition de devis et\nde convenir d’un rendez-vous pour évaluer le chantier.\n\nAdresse d’installation :\nRue Montbazon, 33000 Bordeaux\n\nCordialement,\nBenoit\n"
+          }
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Workflow Input Trigger": {
+      "main": [
+        [
+          {
+            "node": "Agent IA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agent IA",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent IA",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qdrant Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent IA",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calcul Distance Temps": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent IA",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent Calendrier": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent IA",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Agent IA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Agent IA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Agent IA",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Envois Message Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent IA": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "52b8f3b3-ed39-4d6d-b0a4-ffbd1b460e9f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3c2ea20af5bac13bd16313e89630741b71c0832df524fb17e56957cfeb36ac2a"
+  },
+  "id": "PY7gl6KSkLwrekhB",
+  "tags": [
+    {
+      "createdAt": "2025-02-05T13:32:40.198Z",
+      "updatedAt": "2025-02-05T13:32:40.198Z",
+      "id": "bRbTEVbqVRl9odfJ",
+      "name": "Video"
+    }
+  ]
+}
