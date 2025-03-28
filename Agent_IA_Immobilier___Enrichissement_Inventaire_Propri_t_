@@ -1,0 +1,44 @@
+Ce workflow est particulièrement intéressant car il utilise plusieurs technologies d'IA pour analyser et valoriser automatiquement les objets présents dans un inventaire immobilier. Voici son fonctionnement :
+
+Récupération des données :
+
+Le système récupère les entrées d'inventaire depuis une base de données Airtable
+Il se concentre sur les objets qui ont une image mais n'ont pas encore été analysés par l'IA
+
+
+Double analyse intelligente :
+
+Un premier agent "Agent Analyse Objet" examine l'image pour identifier les caractéristiques de l'objet :
+
+Titre et description détaillée
+Modèle et marque
+Matériaux de fabrication
+Couleur dominante
+État de conservation (mauvais, bon, excellent)
+
+
+Un second agent "Agent IA Estimation Prix" évalue la valeur marchande de l'objet :
+
+Formule des requêtes optimisées pour Google Shopping
+Compare avec des objets similaires sur le marché
+Calcule une estimation de prix fiable en utilisant des méthodes statistiques
+
+
+
+
+Enrichissement par recherche web :
+
+Recherche inversée d'images pour identifier des objets identiques
+Scraping de sites web pertinents pour obtenir plus d'informations
+Récupération des prix sur Google Shopping pour améliorer l'estimation
+
+
+Traitement et mise à jour automatique :
+
+L'agent finalise ses analyses et estimations
+La base de données Airtable est automatiquement mise à jour avec toutes les informations recueillies
+Le statut de l'objet est marqué comme "analysé par IA"
+
+
+
+Ce système permet une valorisation précise et automatisée d'inventaires immobiliers, ce qui est particulièrement utile pour les agents immobiliers, les gestionnaires de propriétés ou les assureurs qui doivent estimer la valeur des biens contenus dans un logement.
