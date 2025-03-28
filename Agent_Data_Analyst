@@ -1,0 +1,11 @@
+Ce workflow fonctionne comme un bot Telegram capable d'analyser des données et de générer des visualisations à la demande. Voici son fonctionnement principal :
+
+Un déclencheur Telegram capte les messages ou notes vocales des utilisateurs
+Pour les messages vocaux, il y a une transcription via OpenAI
+Le message est traité par un agent IA "Data Analyst" (utilisant Anthropic/Claude)
+L'agent accède à une base de données NocoDB contenant des données sur des factures
+L'agent peut analyser ces données et, si nécessaire, utiliser un outil spécial pour générer des graphiques
+Les graphiques sont créés via l'API QuickChart puis envoyés à l'utilisateur sur Telegram
+Une explication textuelle accompagne le graphique
+
+C'est un exemple intelligent d'automatisation qui combine intelligence artificielle, traitement de données et communication via messagerie pour offrir un service d'analyse à la demande.
