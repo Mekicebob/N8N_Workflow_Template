@@ -1,0 +1,34 @@
+Ce workflow est l'un des plus sophistiqués parmi ceux que nous avons examinés, utilisant plusieurs agents IA spécialisés qui travaillent ensemble comme une équipe virtuelle. Voici ses principales composantes :
+
+Agent orchestrateur principal :
+
+Reçoit les demandes via Telegram ou les emails
+Analyse le contenu des messages (texte ou transcription audio)
+Coordonne les agents spécialisés en fonction des besoins
+
+
+Trois agents spécialisés interconnectés :
+
+Agent Email : Gère toutes les communications par email (création de brouillons, réponse aux messages, organisation des conversations)
+Agent Calendrier : Gère entièrement l'agenda (création, modification et suppression d'événements, vérification des disponibilités)
+Outil de calcul de distance : Évalue les temps de trajet pour les interventions sur site
+
+
+Système RAG (Retrieval Augmented Generation) :
+
+Base de connaissances dynamique stockée dans Qdrant
+S'enrichit automatiquement avec les nouveaux documents Google Drive
+Fournit des informations contextuelles pour des réponses précises
+
+
+Fonctionnalités clés :
+
+Traitement complet des emails (lecture, analyse, rédaction de réponses)
+Transcription automatique des messages vocaux Telegram
+Gestion intelligente des rendez-vous et interventions
+Calcul automatique des temps de déplacement pour les interventions
+Prise de décisions autonomes selon des règles d'entreprise définies
+
+
+
+Ce workflow représente un assistant virtuel complet pour un entrepreneur ou une petite entreprise de services, capable de gérer de façon autonome une grande partie de la communication avec les clients et de l'organisation des interventions, tout en s'adaptant aux contraintes de temps et de distance.
