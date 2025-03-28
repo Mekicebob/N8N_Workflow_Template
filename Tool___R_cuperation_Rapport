@@ -1,0 +1,35 @@
+Ce workflow est un outil auxiliaire conçu pour être appelé par d'autres workflows. Il permet d'automatiser la récupération et la synthèse de rapports stockés dans Google Drive.
+Fonctionnement en 4 étapes principales :
+
+Déclenchement et localisation des rapports :
+
+Un déclencheur d'exécution de workflow reçoit l'appel d'un autre workflow
+Le nœud Google Drive1 accède à un dossier spécifique de rapports ("Rapports")
+Le système récupère la liste de tous les fichiers disponibles dans ce dossier
+
+
+Téléchargement et extraction du contenu :
+
+Google Drive2 télécharge le fichier rapport spécifié (selon l'ID)
+"Extract from File" extrait le texte du document PDF
+Cette étape transforme le document visuel en texte analysable
+
+
+Analyse intelligente et synthèse :
+
+Un agent IA (utilisant OpenAI) traite le texte extrait
+Il génère une synthèse concise des informations clés du rapport
+L'accent est mis sur la conservation des chiffres et pourcentages importants
+Le formatage est appliqué en Markdown pour une meilleure lisibilité
+
+
+Préparation des résultats :
+
+L'information structurée est traitée via un "Structured Output Parser"
+"Edit Fields" prépare la réponse finale avec le champ "reponse_synthese_rapport"
+Le résultat est renvoyé au workflow appelant pour utilisation ultérieure
+
+
+
+Ce workflow représente un excellent exemple d'outil modulaire qui peut être intégré dans des systèmes plus larges. Il automatise une tâche cognitive complexe (lire et résumer des rapports) qui prendrait normalement beaucoup de temps à un humain.
+La valeur principale réside dans sa capacité à extraire rapidement l'essentiel d'un document potentiellement long et complexe, permettant aux équipes de support client de gagner du temps et d'accéder rapidement aux informations critiques.
