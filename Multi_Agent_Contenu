@@ -1,0 +1,33 @@
+Ce workflow implémente une chaîne de production de contenu automatisée qui transforme une simple demande en contenu optimisé pour trois plateformes différentes. Voici ses principales caractéristiques :
+
+Capture et traitement des demandes :
+
+Un déclencheur de chat reçoit les requêtes des utilisateurs
+Un extracteur d'information identifie automatiquement l'audience cible, le sujet et le nom de campagne
+Les informations sont stockées dans Google Sheets pour suivi et référence
+
+
+Recherche et enrichissement :
+
+Utilisation de l'API Tavily pour effectuer des recherches sur le web
+Collecte de données pertinentes et actuelles sur le sujet demandé
+Agrégation des résultats pour fournir une base documentaire solide
+
+
+Triple création de contenu spécialisée :
+
+Agent LinkedIn : Crée des posts professionnels optimisés pour la viralité, avec accès à une base de connaissances Pinecone pour reproduire le ton de voix approprié
+Agent Blog : Génère des articles complets et structurés avec optimisation SEO
+Agent X (Twitter) : Produit des tweets percutants respectant la limite de caractères
+
+
+Stockage et suivi :
+
+Enregistrement de tous les contenus générés dans Google Sheets
+Organisation par campagne pour un suivi facile des performances
+Structure permettant des mises à jour et améliorations continues
+
+
+
+Ce workflow est particulièrement puissant pour les équipes marketing ou les créateurs de contenu qui souhaitent maintenir une présence cohérente mais adaptée sur différentes plateformes. L'utilisation de modèles GPT-4o permet d'obtenir un contenu de haute qualité adapté aux spécificités de chaque réseau social.
+Une force majeure de ce système est sa capacité à maintenir un message cohérent tout en adaptant le format, le ton et le style à chaque plateforme, tout en s'appuyant sur des recherches actualisées.
