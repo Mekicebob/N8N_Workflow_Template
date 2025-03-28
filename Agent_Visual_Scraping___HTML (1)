@@ -1,0 +1,33 @@
+Ce workflow est conçu pour extraire automatiquement des informations de produits depuis des sites web en combinant analyse d'images et scraping HTML. Voici les actions principales :
+
+Extraction des données :
+
+Récupération des URLs à scraper depuis Airtable
+Capture d'écran complète des pages web via ScrapingBee
+Extraction du code HTML des pages cibles
+
+
+Analyse intelligente :
+
+Un "Agent Analyseur d'images" utilisant Google Gemini analyse les captures d'écran
+Identification précise des informations clés (nom, auteur, prix, note, etc.)
+Complétion des données manquantes via l'analyse du HTML
+
+
+Structuration et stockage :
+
+Formatage des données dans un format JSON standardisé
+Vérification et correction automatique via l'Auto-fixing Output Parser
+Enregistrement des résultats dans une table Airtable
+
+
+Fonctionnalités avancées :
+
+Détection des auteurs multiples
+Extraction des notes et du nombre d'avis
+Conservation des liens vers les produits d'origine
+
+
+
+Ce workflow est particulièrement efficace pour le e-commerce, permettant d'automatiser la collecte d'informations sur des produits (ici des livres) et la création de bases de données structurées sans intervention manuelle.
+Ce type d'automatisation peut être utilisé pour la veille concurrentielle, l'analyse de marché ou la création de catalogues de produits.
