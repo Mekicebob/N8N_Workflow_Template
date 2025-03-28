@@ -1,0 +1,26 @@
+Ce workflow est structuré en deux grandes sections:
+
+Section Agent Data-Analyst (partie supérieure):
+
+Cette partie commence avec un déclencheur Telegram qui capture les messages texte ou vocaux
+Pour les messages vocaux, le nœud OpenAI transcrit l'audio en texte
+Le texte est ensuite transmis à l'agent "Data Analyst" qui utilise Claude (Anthropic)
+Cet agent a accès à une base de données NocoDB contenant des informations sur des factures
+Il utilise également un composant "Window Buffer Memory" pour maintenir le contexte des conversations
+
+
+Section Agent Visualisation Graphique (partie inférieure):
+
+Cette section est dédiée à la création de graphiques
+L'agent "Agent Création Graphique" utilise OpenAI pour transformer les descriptions en configurations Chart.js
+Un "Structured Output Parser" s'assure que le format de sortie est correct
+Le nœud "Reponse URL" formate l'URL pour l'API QuickChart
+
+
+
+Le workflow permet à un utilisateur d'interagir via Telegram pour:
+
+Poser des questions sur les données de facturation
+Demander des analyses (moyennes, corrélations, tendances)
+Obtenir des visualisations graphiques spécifiques
+Recevoir des réponses sous forme de texte explicatif et d'images
