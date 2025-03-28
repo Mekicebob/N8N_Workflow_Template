@@ -1,0 +1,32 @@
+Ce système transforme une simple vidéo YouTube en multiples ressources exploitables.
+Voici comment fonctionne ce workflow intelligent :
+
+Extraction et analyse du contenu :
+
+Récupère automatiquement la transcription d'une vidéo YouTube via l'API Apify
+Analyse le contenu de manière approfondie grâce à plusieurs modèles IA
+
+
+Génération multi-format :
+
+Crée une synthèse détaillée et orientée action (envoyée par Gmail)
+Extrait les 3 points clés les plus percutants (partagés sur Slack)
+Génère 15 idées de contenu organisées en 3 catégories : tutoriels d'automatisation, actualités et vidéos techniques
+Transforme ces idées en titres YouTube optimisés pour la viralité
+
+
+Distribution et stockage :
+
+Envoie la synthèse complète par email pour référence
+Partage les points clés sur un canal Slack dédié (probablement pour l'équipe)
+Crée et met à jour un document Google Docs avec toutes les idées de contenu
+
+
+
+Ce workflow est particulièrement utile pour :
+
+Les créateurs de contenu qui veulent maximiser la valeur de chaque vidéo
+Les équipes marketing qui suivent les tendances et la concurrence
+Les spécialistes du contenu qui cherchent à alimenter leur calendrier éditorial
+
+En transformant une seule vidéo en multiples outputs, ce système permet d'économiser un temps considérable tout en maintenant une qualité élevée grâce à l'analyse IA avancée.
