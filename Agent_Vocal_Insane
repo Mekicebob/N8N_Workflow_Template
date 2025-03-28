@@ -1,0 +1,35 @@
+Ce workflow est conçu pour être un assistant vocal intelligent capable de traiter les demandes clients et de gérer des rendez-vous. C'est une solution idéale pour automatiser le service client via des interfaces vocales ou textuelles.
+Principales caractéristiques :
+
+Point d'entrée et traitement des requêtes :
+
+Un webhook reçoit les requêtes entrantes (probablement depuis une interface vocale)
+L'agent AI principal (utilisant GPT-4o) analyse ces requêtes et comprend l'intention de l'utilisateur
+Gestion complète des informations de contact (nom, prénom, email, téléphone, dates)
+
+
+Fonctionnalités clés :
+
+Correction et validation automatique des emails et numéros de téléphone
+Vérification des disponibilités dans Google Calendar
+Création de rendez-vous avec envoi d'invitations
+Stockage des contacts dans Google Sheets
+Accès à une base de connaissances via vectorisation (Pinecone)
+Recherche web pour compléter les informations manquantes
+
+
+Architecture intelligente :
+
+Module de correction des données (particulièrement utile pour les données vocales)
+Système RAG (Retrieval Augmented Generation) pour accéder aux informations d'entreprise
+Intégration complète avec les outils Google (Sheets, Calendar)
+
+
+
+Ce workflow est particulièrement bien adapté pour :
+
+Un service de prise de rendez-vous entièrement automatisé
+Des assistants virtuels pour cabinets médicaux, salons, consultants
+Des secrétaires virtuels pour petites entreprises
+
+La force de ce système est sa capacité à traiter des données vocales imparfaites, à les corriger, et à effectuer des actions concrètes (comme la planification de rendez-vous) tout en accédant à des informations contextuelles pour fournir des réponses précises.
