@@ -1,0 +1,42 @@
+Objectif principal du workflow
+Ce workflow automatise la collecte et l'enrichissement des données d'un lead qui a complété un formulaire Typeform. Il recueille des informations supplémentaires sur le prospect et son entreprise à partir de différentes sources, puis les agrège dans une base de données Airtable et envoie une notification par email.
+Étapes et fonctionnalités principales
+
+Déclencheur Typeform : Le workflow commence lorsqu'un utilisateur remplit un formulaire Typeform, fournissant des informations de base (prénom, nom, téléphone, email, nom d'entreprise et site web).
+Agent IA : L'agent IA central analyse ces données initiales et orchestre la collecte d'informations supplémentaires en utilisant plusieurs outils de recherche.
+Outils de recherche :
+
+Recherche de données publiques : Interroge les données INSEE pour les entreprises françaises pour obtenir le SIRET et autres informations légales.
+Recherche Instagram : Tente de trouver le compte Instagram de l'entreprise.
+Recherche LinkedIn : Cherche le profil LinkedIn de la personne et analyse son activité, ses connections et publications récentes.
+Scraping de site web : Si un site web est fourni, il est analysé et évalué avec une note sur 10.
+
+
+Analyse et évaluation :
+
+Le système attribue un score au prospect (une "note") en fonction des données collectées, particulièrement de l'analyse du site web.
+Une logique conditionnelle (nœud "If") vérifie si la note est ≥ 4 pour déclencher d'autres actions.
+
+
+Stockage des données :
+
+Les informations enrichies sont structurées selon un schéma précis via un "Structured Output Parser".
+Les données sont enregistrées dans une base Airtable avec plusieurs champs: nom complet, email, téléphone, entreprise, statut, note, liens sociaux, SIRET, etc.
+
+
+Notification :
+
+Un email est envoyé via Gmail contenant toutes les informations collectées sur le lead.
+
+
+
+Architecture technique
+Le workflow utilise plusieurs technologies et approches sophistiquées :
+
+Intelligence artificielle : Utilise GPT-4o pour analyser les données et générer des décisions.
+Automatisation multi-canaux : Intègre divers services (Typeform, APIs LinkedIn, Instagram, INSEE, web scraping, Airtable, Gmail).
+Scoring de leads : Attribue un score basé sur plusieurs facteurs pour prioriser les leads.
+APIs externes : Utilise RapidAPI pour accéder à des données LinkedIn et Instagram.
+Traitement parallèle : Plusieurs recherches sont effectuées simultanément pour optimiser le temps de traitement.
+
+Ce workflow est particulièrement utile pour les équipes commerciales ou marketing qui souhaitent automatiser la qualification des leads et obtenir rapidement un dossier complet sur chaque prospect avec un minimum d'information initiale, facilitant ainsi le travail des commerciaux et augmentant l'efficacité du processus de vente.
