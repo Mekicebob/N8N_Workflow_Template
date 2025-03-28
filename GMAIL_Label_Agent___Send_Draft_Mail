@@ -1,0 +1,32 @@
+Ce workflow implémente un système de tri intelligent des emails avec réponse automatisée pour certaines catégories. Il combine classification IA et automatisation des tâches de messagerie.
+Principales fonctionnalités :
+
+Surveillance et classification des emails :
+
+Un déclencheur Gmail capte tous les nouveaux emails entrants
+L'agent "Agent Label" utilise l'IA (OpenAI) pour analyser et catégoriser automatiquement chaque email
+Classification en 6 catégories distinctes : Sponsorship, Collaboration, Mails clients, Newsletter, Services en ligne, et Autres
+
+
+Organisation automatique de la boîte de réception :
+
+Application automatique d'étiquettes Gmail en fonction de la catégorie identifiée
+Chaque catégorie est associée à un ID d'étiquette Gmail spécifique
+Structure en code couleur pour une organisation visuelle (notes adhésives bleues et vertes)
+
+
+Réponse intelligente pour catégories prioritaires :
+
+Un second agent IA génère des réponses pour trois catégories prioritaires : Sponsorship, Collaboration et Mails clients
+L'agent produit un sujet et un corps de message adaptés au contexte de l'email original
+Création automatique d'un brouillon de réponse dans Gmail (sans envoi automatique, permettant une vérification humaine)
+
+
+
+Ce workflow est particulièrement utile pour :
+
+Les professionnels recevant un volume important d'emails quotidiens
+Les entrepreneurs souhaitant prioriser leur communication
+Les équipes marketing gérant différents types de collaborations et partenariats
+
+En combinant classification intelligente et pré-rédaction des réponses, ce système permet de gagner un temps considérable tout en maintenant une boîte de réception organisée.
