@@ -1,0 +1,18 @@
+Le workflow "Visual Scraping N8N" est conçu pour extraire automatiquement des informations sur des livres depuis des pages web (probablement Amazon) et les stocker dans une base de données Airtable. Voici son fonctionnement :
+
+Il commence par récupérer des URL de sites à scraper depuis une table Airtable
+Il utilise ScrapingBee pour obtenir à la fois le HTML et une capture d'écran des pages
+Un agent IA (Google Gemini) analyse les captures d'écran pour extraire les détails des livres tels que :
+
+Titre du livre
+Auteur(s)
+Prix
+Note
+Nombre d'avis
+Type de livre (Broché, Poche, Relié)
+
+
+L'outil "Scrape_HTML_Page" est utilisé pour compléter les informations en analysant le HTML
+Les données structurées sont ensuite enregistrées dans une table Airtable "Livre"
+
+C'est un workflow qui automatise l'extraction de données de produits depuis des sites web en combinant web scraping et intelligence artificielle pour analyse d'images.
