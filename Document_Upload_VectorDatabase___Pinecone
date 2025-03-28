@@ -1,0 +1,31 @@
+Ce workflow représente un système simple mais efficace pour créer une base de connaissances vectorisée à partir de documents PDF. C'est une composante fondamentale pour construire des agents IA avec mémoire et contexte.
+Le processus fonctionne en 3 étapes principales :
+
+Extraction du document :
+
+Récupération d'un fichier PDF depuis Google Drive
+Dans cet exemple, le document s'intitule "GrowthSystemes - Informations.pdf"
+
+
+Préparation des données :
+
+Découpage du texte en fragments (chunks) de 3000 caractères avec 200 caractères de chevauchement
+Cette segmentation permet une indexation et une recherche optimales
+Le "Default Data Loader" charge les données binaires du PDF
+
+
+Création des embeddings et stockage :
+
+Génération d'embeddings vectoriels via OpenAI
+Stockage dans la base de données vectorielle Pinecone
+Le tout est indexé dans une collection nommée "growthsystemesfiles"
+
+
+
+Ce type de workflow est essentiel pour :
+
+Alimenter des agents IA avec des connaissances spécifiques à une entreprise
+Créer des systèmes de recherche sémantique basés sur le sens plutôt que sur des mots-clés
+Fournir du contexte pertinent aux modèles de langage pour des réponses précises
+
+La construction d'une base de connaissances vectorisée est une pratique fondamentale dans le développement d'applications IA modernes, particulièrement celles utilisant le Retrieval Augmented Generation (RAG). Ce workflow montre une implémentation simple mais complète de ce concept.
