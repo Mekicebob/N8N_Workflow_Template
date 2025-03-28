@@ -1,0 +1,38 @@
+Ce workflow fonctionne comme un système complet d'analyse et de gestion des tickets de support avec un focus sur la prévention des désabonnements. Voici les principaux composants :
+
+Interface d'interaction :
+
+Un chat trigger qui permet aux utilisateurs d'interagir directement avec le système
+Une mémoire tampon pour maintenir le contexte des conversations
+
+
+Moteur IA de prédiction :
+
+Un agent principal "Agent Prediction Churn" utilisant OpenAI (GPT-4)
+Un module de prédiction du risque de désabonnement basé sur machine learning
+Évaluation des tickets et classification par niveau d'urgence
+
+
+Base de connaissances :
+
+Stockage vectoriel Supabase pour les documents de référence
+Système d'embeddings pour recherche sémantique
+Surveillance automatique d'un dossier Google Drive pour les mises à jour
+
+
+Fonctionnalités avancées :
+
+Génération automatique de rapports d'analyse long terme
+Notifications automatiques à l'équipe support pour les cas urgents
+Historique client et accès à la base de données des tickets
+
+
+
+Ce workflow permet de :
+
+Identifier rapidement les clients à risque de désabonnement
+Prioriser les tickets selon leur criticité (Très Urgent, Urgent, Peu Urgent)
+Fournir aux agents du support les informations nécessaires pour résoudre les problèmes
+Générer des analyses périodiques pour améliorer la qualité du service
+
+Ce système associe parfaitement intelligence artificielle, automatisation et intégration avec des outils externes (Airtable, Google Drive, Gmail) pour optimiser la rétention client.
