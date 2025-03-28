@@ -1,0 +1,31 @@
+Ce workflow agit comme un assistant financier virtuel qui peut :
+
+Évaluer l'éligibilité aux prêts
+Organiser des rendez-vous
+Envoyer des communications par email
+
+Voici le fonctionnement principal :
+
+Point d'entrée :
+
+Un webhook reçoit les requêtes entrantes (probablement depuis un site web ou une application)
+Ces requêtes contiennent les informations du demandeur de prêt (revenus, situation familiale, etc.)
+
+
+Intelligence artificielle :
+
+Un agent AI (basé sur GPT-4o d'OpenAI) analyse la demande
+Il détermine l'intention de l'utilisateur : validation de prêt, prise de rendez-vous, ou autre
+
+
+Outils intégrés :
+
+Get_Validation_Pret : Appelle un modèle de machine learning qui évalue l'éligibilité au prêt
+CreerRDV : Crée des rendez-vous dans Google Calendar
+Availibility : Vérifie les disponibilités du calendrier
+EnvoyerMailPret : Envoie des emails aux clients via Gmail
+RecupererMail : Consulte une feuille Google Sheets pour obtenir les coordonnées des clients
+
+
+
+Le workflow est bien structuré pour optimiser le processus d'approbation des prêts et améliorer l'efficacité des banquiers.
