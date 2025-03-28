@@ -1,0 +1,33 @@
+Ce workflow combine plusieurs technologies pour capturer, analyser et stocker des factures, que ce soit par Telegram ou par email. Voici son fonctionnement principal :
+
+Sources d'entrée multiples :
+
+Un trigger Telegram qui capture les messages texte, audio et images
+Un trigger Gmail qui surveille les emails et leurs pièces jointes
+
+
+Traitement intelligent des documents :
+
+Les messages vocaux sont transcrits via OpenAI
+Les images de factures sont téléchargées et stockées sur Google Drive
+Un agent AI (GPT-4o) analyse le contenu des factures pour en extraire les informations pertinentes
+
+
+Stockage structuré dans Airtable :
+
+Une table principale "Factures" pour les métadonnées (montant, nom, type, notes)
+Une table "Objets" pour les articles individuels de chaque facture
+Une table pour les taxes associées à chaque facture
+
+
+Fonctionnalités utilisateur :
+
+Création de factures à partir d'images/PDF
+Recherche et récupération de factures existantes
+Réponses intelligentes aux requêtes utilisateur
+Envoi de factures par message avec une prévisualisation
+
+
+
+Ce workflow permet à un utilisateur d'envoyer simplement une photo de facture par Telegram ou en pièce jointe d'email, puis l'IA extrait toutes les informations pertinentes et les insère dans une base de données structurée. Il peut également retrouver des factures existantes sur demande.
+C'est un excellent exemple d'automatisation qui combine intelligemment plusieurs canaux d'entrée, traitement IA et bases de données pour simplifier une tâche administrative courante.
